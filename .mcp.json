@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "ephemeris": {
+      "type": "http",
+      "url": "https://ephemeris.cascade.industries/api/mcp",
+      "headers": {
+        "Authorization": "Bearer ${user_config.api_key}"
+      }
+    }
+  }
+}

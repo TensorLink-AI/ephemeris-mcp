@@ -1,0 +1,14 @@
+{
+  "name": "ephemeris-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for Ephemeris time-series forecasting: probabilistic forecasts from Chronos-2, TimesFM 2.5, Toto 2, TiRex-2 and IBM Granite models. Stdio bridge to the remote server.",
+  "bin": { "ephemeris-mcp": "cli/ephemeris-mcp.js" },
+  "files": ["cli/"],
+  "engines": { "node": ">=18" },
+  "dependencies": { "mcp-remote": "^0.14.3" },
+  "keywords": ["mcp", "model-context-protocol", "forecasting", "time-series", "prediction", "chronos", "timesfm", "tirex", "toto", "demand-forecasting"],
+  "homepage": "https://ephemeris.cascade.industries",
+  "repository": { "type": "git", "url": "git+https://github.com/TensorLink-AI/ephemeris-mcp.git" },
+  "mcpName": "industries.cascade/ephemeris",
+  "license": "MIT"
+}

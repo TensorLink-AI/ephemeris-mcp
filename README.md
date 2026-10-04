@@ -1,0 +1,116 @@
+# Ephemeris MCP server: time-series forecasting for AI agents
+
+Give Claude, Cursor, ChatGPT or any MCP client the ability to **forecast numeric time series with prediction intervals**: sales, demand, inventory, web traffic, signups, revenue, energy load, prices, sensor readings, infrastructure metrics.
+
+Ephemeris runs a panel of open-weights, zero-shot forecasting foundation models behind one API key:
+
+| Model | Publisher | Use by name |
+|---|---|---|
+| [Chronos-2](https://ephemeris.cascade.industries/models/chronos-2) | Amazon | `chronos2` |
+| [TimesFM 2.5](https://ephemeris.cascade.industries/models/timesfm-2-5) | Google Research | `timesfm25` |
+| [Toto 2](https://ephemeris.cascade.industries/models/toto-2) | Datadog | `toto2-313m` |
+| [TiRex-2](https://ephemeris.cascade.industries/models/tirex-2) | NXAI | `tirex2` |
+| [PatchTST-FM r2](https://ephemeris.cascade.industries/models/patchtst-fm) | IBM Granite | `patchtst-fm-r2` |
+| [FlowState r1](https://ephemeris.cascade.industries/models/flowstate) | IBM Granite | `flowstate-r1` |
+
+Send history, get quantile forecasts back. No training, no feature engineering, no GPU. Name a model, let Ephemeris **route** to the best fit for your data, or use the **ensemble**, an accuracy-weighted blend of the panel:
+
+- **TIME**: level with the top of the leaderboard (MASE 0.639 vs 0.638 for the leader), with the best average MASE rank of 31 models
+- **GIFT-Eval**: CRPS 0.4662 against seasonal naive, ahead of every open-licence model
+
+Scored with each benchmark's own harness. Details: [ephemeris.cascade.industries/benchmarks](https://ephemeris.cascade.industries/benchmarks).
+
+## Tools
+
+| Tool | What it does |
+|---|---|
+| `forecast` | Forecast 1 to 64 series in one call: `route`, `ensemble` or `explicit` mode, any quantiles, optional covariates, horizons up to 512 steps |
+| `list_models` | The live panel: health, capabilities, horizon limits, ensemble weights, prices |
+| `get_balance` | Spendable credits |
+| `get_usage` | Recent requests and what each cost |
+
+## Get an API key
+
+Sign up at [ephemeris.cascade.industries](https://ephemeris.cascade.industries/sign-up), add credits, and create a key (`pc_live_...`) in the dashboard. Pay per forecast, no subscription: [pricing](https://ephemeris.cascade.industries/pricing).
+
+## Connect
+
+Remote server (Streamable HTTP): `https://ephemeris.cascade.industries/api/mcp`, header `Authorization: Bearer pc_live_...`
+
+**Claude Code (plugin: MCP server plus a forecasting skill)**
+
+```
+/plugin marketplace add TensorLink-AI/ephemeris-mcp
+/plugin install ephemeris@ephemeris
+```
+
+You are asked for your API key once; it is stored in your system's secure credential store.
+
+**Claude Code (server only)**
+
+```
+claude mcp add --transport http ephemeris https://ephemeris.cascade.industries/api/mcp \
+  --header "Authorization: Bearer pc_live_your_key"
+```
+
+**Cursor (`.cursor/mcp.json`) and most clients**
+
+```json
+{
+  "mcpServers": {
+    "ephemeris": {
+      "url": "https://ephemeris.cascade.industries/api/mcp",
+      "headers": { "Authorization": "Bearer pc_live_your_key" }
+    }
+  }
+}
+```
+
+**VS Code (`.vscode/mcp.json`)**
+
+```json
+{
+  "servers": {
+    "ephemeris": {
+      "type": "http",
+      "url": "https://ephemeris.cascade.industries/api/mcp",
+      "headers": { "Authorization": "Bearer pc_live_your_key" }
+    }
+  }
+}
+```
+
+**Claude Desktop and other clients that only run local (stdio) servers**
+
+```json
+{
+  "mcpServers": {
+    "ephemeris": {
+      "command": "npx",
+      "args": ["-y", "ephemeris-mcp"],
+      "env": { "EPHEMERIS_API_KEY": "pc_live_your_key" }
+    }
+  }
+}
+```
+
+**OpenAI Responses API, Anthropic Messages API, Codex, Gemini CLI**: see [the docs](https://ephemeris.cascade.industries/docs#agents).
+
+## Try it
+
+Once connected, ask:
+
+- "Here are my last 18 months of sales: … Forecast the next 6 months with an 80% interval."
+- "Forecast next week's hourly traffic from this CSV and tell me the likely peak."
+- "Use the ensemble to project daily signups for 90 days; plot the median and the 10th to 90th percentile band."
+
+More in [examples/prompts.md](examples/prompts.md). Without MCP, the same forecast is one REST call: [examples/rest_forecast.py](examples/rest_forecast.py).
+
+## Reference
+
+- Full reference for LLMs: [llms-full.txt](https://ephemeris.cascade.industries/llms-full.txt)
+- API docs: [ephemeris.cascade.industries/docs](https://ephemeris.cascade.industries/docs)
+- OpenAPI: [openapi-m1.json](https://ephemeris.cascade.industries/openapi-m1.json)
+- Status: [ephemeris.cascade.industries/status](https://ephemeris.cascade.industries/status)
+
+The code in this repository (the plugin manifest, skill and stdio bridge) is MIT-licensed. The models keep their own licences, listed on each model page.

@@ -1,0 +1,12 @@
+{
+  "name": "ephemeris",
+  "description": "Time-series forecasting for agents: the Ephemeris MCP server and forecasting skill.",
+  "owner": { "name": "Ephemeris", "url": "https://ephemeris.cascade.industries" },
+  "plugins": [
+    {
+      "name": "ephemeris",
+      "source": "./",
+      "description": "Probabilistic time-series forecasts from a panel of foundation models, as an MCP server plus a forecasting skill."
+    }
+  ]
+}

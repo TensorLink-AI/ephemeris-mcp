@@ -1,0 +1,21 @@
+{
+  "name": "ephemeris",
+  "displayName": "Ephemeris forecasting",
+  "version": "1.0.0",
+  "description": "Probabilistic time-series forecasts (sales, demand, traffic, load, prices, metrics) from Chronos-2, TimesFM 2.5, Toto 2, TiRex-2 and IBM Granite models, singly or as an accuracy-weighted ensemble. Adds the Ephemeris MCP server and a forecasting skill.",
+  "author": { "name": "Ephemeris", "url": "https://ephemeris.cascade.industries" },
+  "homepage": "https://ephemeris.cascade.industries/docs#agents",
+  "repository": "https://github.com/TensorLink-AI/ephemeris-mcp",
+  "license": "MIT",
+  "keywords": ["forecasting", "time-series", "prediction", "demand-forecasting", "mcp", "chronos", "timesfm", "tirex", "toto"],
+  "documentationUrl": "https://ephemeris.cascade.industries/docs",
+  "userConfig": {
+    "api_key": {
+      "type": "string",
+      "title": "Ephemeris API key",
+      "description": "Starts with pc_live_. Create one at https://ephemeris.cascade.industries/dashboard/api-keys after signing up.",
+      "sensitive": true,
+      "required": true
+    }
+  }
+}
