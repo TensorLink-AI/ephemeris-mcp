@@ -14,6 +14,16 @@ Preferred: the remote MCP server, which exposes `forecast`, `list_models`, `get_
 - URL: `https://ephemeris.cascade.industries/api/mcp` (Streamable HTTP)
 - Header: `Authorization: Bearer <EPHEMERIS_API_KEY>`
 
+In Hermes Agent, add it to `~/.hermes/config.yaml` and put the key in `~/.hermes/.env` as `EPHEMERIS_API_KEY`:
+
+```yaml
+mcp_servers:
+  ephemeris:
+    url: "https://ephemeris.cascade.industries/api/mcp"
+    headers:
+      Authorization: "Bearer ${EPHEMERIS_API_KEY}"
+```
+
 If MCP is not available, call `POST https://ephemeris.cascade.industries/api/v1/forecast` with the same bearer header (request and response format in llms-full.txt).
 
 The user must provide the API key. Never hard-code it or write it to files in their repository.
