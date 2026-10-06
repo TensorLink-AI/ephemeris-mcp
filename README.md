@@ -1,5 +1,7 @@
 # Ephemeris MCP server: time-series forecasting for AI agents
 
+[![Add Ephemeris to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en/install-mcp?name=ephemeris&config=eyJ1cmwiOiJodHRwczovL2VwaGVtZXJpcy5jYXNjYWRlLmluZHVzdHJpZXMvYXBpL21jcCIsImhlYWRlcnMiOnsiQXV0aG9yaXphdGlvbiI6IkJlYXJlciBZT1VSX0VQSEVNRVJJU19BUElfS0VZIn19)
+
 Give Claude, Cursor, ChatGPT or any MCP client the ability to **forecast numeric time series with prediction intervals**: sales, demand, inventory, web traffic, signups, revenue, energy load, prices, sensor readings, infrastructure metrics.
 
 Ephemeris runs a panel of open-weights, zero-shot forecasting foundation models behind one API key:
@@ -52,6 +54,8 @@ You are asked for your API key once; it is stored in your system's secure creden
 claude mcp add --transport http ephemeris https://ephemeris.cascade.industries/api/mcp \
   --header "Authorization: Bearer pc_live_your_key"
 ```
+
+**Cursor**: one click with [![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en/install-mcp?name=ephemeris&config=eyJ1cmwiOiJodHRwczovL2VwaGVtZXJpcy5jYXNjYWRlLmluZHVzdHJpZXMvYXBpL21jcCIsImhlYWRlcnMiOnsiQXV0aG9yaXphdGlvbiI6IkJlYXJlciBZT1VSX0VQSEVNRVJJU19BUElfS0VZIn19), then replace `YOUR_EPHEMERIS_API_KEY` with your key in Cursor's MCP settings. Or add it by hand:
 
 **Cursor (`.cursor/mcp.json`) and most clients**
 
