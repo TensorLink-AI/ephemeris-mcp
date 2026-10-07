@@ -20,7 +20,7 @@ Ephemeris runs a panel of open-weights, zero-shot time-series foundation models 
 Send history, get quantile forecasts back. No training, no feature engineering, no GPU. Name a model, let Ephemeris **route** to the best fit for your data, or use the **ensemble**, an accuracy-weighted blend of the panel:
 
 - **TIME**: level with the top of the leaderboard (MASE 0.639 vs 0.638 for the leader), with the best average MASE rank of 31 models
-- **GIFT-Eval**: CRPS 0.4662 against seasonal naive, ahead of every open-licence model
+- **GIFT-Eval**: CRPS 0.4662 against seasonal naive, better than every model it blends (a few leaderboard entries, including TimesFM-3, score better)
 
 Scored with each benchmark's own harness. Details: [ephemeris.cascade.industries/benchmarks](https://ephemeris.cascade.industries/benchmarks).
 

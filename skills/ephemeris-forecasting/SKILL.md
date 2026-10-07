@@ -34,7 +34,7 @@ The user must provide the API key. Never hard-code it or write it to files in th
 2. **Check the panel** with `list_models` once per session. Model names, health, `max_horizon` and covariate support come from the live panel, not from memory.
 3. **Pick the mode:**
    - `route` by default: Ephemeris picks the model that suits the data, at the cost of about one model.
-   - `ensemble` when accuracy and calibrated uncertainty matter more than cost (risk, capacity planning, anything the user will act on). It is the most accurate mode: level with the top of the TIME benchmark and ahead of every open-licence model on GIFT-Eval (https://ephemeris.cascade.industries/benchmarks).
+   - `ensemble` when accuracy and calibrated uncertainty matter more than cost (risk, capacity planning, anything the user will act on). It is the most accurate mode: level with the top of the TIME benchmark and scores better on GIFT-Eval than every model it blends (https://ephemeris.cascade.industries/benchmarks).
    - `explicit` only when the user names a model; check it supports the request (`covariates`, `multivariate`, `max_horizon`). A model past its `auto_max_horizon` is left out of route and ensemble but can still be named here.
 4. **Covariates** (known drivers such as price, promotions, holidays, weather): pass `past` aligned with the history and `future` for values known over the horizon. Only covariate-capable models use them; route and ensemble narrow to those automatically.
 5. **Call `forecast`** with `quantiles` that answer the user's question, e.g. `[0.1, 0.5, 0.9]` for an 80% interval. Pass an `idempotency_key` if you might retry.
