@@ -110,6 +110,16 @@ Once connected, ask:
 
 More in [examples/prompts.md](examples/prompts.md). Without MCP, the same forecast is one REST call: [examples/rest_forecast.py](examples/rest_forecast.py).
 
+## Guides
+
+- [How to give Claude, Cursor or any AI agent a forecasting tool](https://ephemeris.cascade.industries/blog/forecasting-tool-for-ai-agents-mcp): setup for each client
+- [Forecasting in LangChain, the OpenAI Agents SDK and the Claude API](https://ephemeris.cascade.industries/blog/forecasting-in-agent-frameworks)
+- [Why language models are bad at forecasting numbers](https://ephemeris.cascade.industries/blog/why-language-models-are-bad-at-time), and [the split that works](https://ephemeris.cascade.industries/blog/llm-for-context-forecaster-for-numbers)
+- [Which time-series foundation model should I use?](https://ephemeris.cascade.industries/blog/which-forecasting-model-should-i-use)
+- [Chronos-2 vs TimesFM 2.5 vs Toto 2 vs TiRex-2](https://ephemeris.cascade.industries/blog/chronos-2-vs-timesfm-vs-toto-vs-tirex)
+- Tutorials: [store sales](https://ephemeris.cascade.industries/blog/forecast-store-sales-with-promotions), [electricity load and solar](https://ephemeris.cascade.industries/blog/forecast-electricity-load-and-solar), [ops capacity](https://ephemeris.cascade.industries/blog/capacity-planning-ops-metrics), [sensors and IoT](https://ephemeris.cascade.industries/blog/forecast-sensor-iot-readings)
+- [All guides](https://ephemeris.cascade.industries/blog)
+
 ## Reference
 
 - Full reference for LLMs: [llms-full.txt](https://ephemeris.cascade.industries/llms-full.txt)
