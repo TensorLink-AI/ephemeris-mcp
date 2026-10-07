@@ -1,4 +1,4 @@
-# Ephemeris MCP server: time-series forecasting for AI agents
+# Ephemeris MCP server: time-series foundation model (TSFM) forecasting for AI agents
 
 [![CI](https://github.com/TensorLink-AI/ephemeris-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/TensorLink-AI/ephemeris-mcp/actions/workflows/ci.yml) [![npm](https://img.shields.io/npm/v/ephemeris-mcp)](https://www.npmjs.com/package/ephemeris-mcp)
 
@@ -6,7 +6,7 @@
 
 Give Claude, Cursor, ChatGPT or any MCP client the ability to **forecast numeric time series with prediction intervals**: sales, demand, inventory, web traffic, signups, revenue, energy load, prices, sensor readings, infrastructure metrics.
 
-Ephemeris runs a panel of open-weights, zero-shot forecasting foundation models behind one API key:
+Ephemeris runs a panel of open-weights, zero-shot time-series foundation models (TSFMs) behind one API key, plus an accuracy-weighted ensemble of them:
 
 | Model | Publisher | Use by name |
 |---|---|---|

@@ -1,7 +1,7 @@
 {
   "name": "ephemeris-mcp",
-  "version": "1.0.0",
-  "description": "MCP server for Ephemeris time-series forecasting: probabilistic forecasts from Chronos-2, TimesFM 2.5, Toto 2, TiRex-2 and IBM Granite models. Stdio bridge to the remote server.",
+  "version": "1.0.1",
+  "description": "MCP server for time-series foundation model (TSFM) forecasting: probabilistic forecasts from Chronos-2, TimesFM 2.5, Toto 2, TiRex-2 and IBM Granite models, or an ensemble. Stdio bridge to the remote server.",
   "bin": {
     "ephemeris-mcp": "cli/ephemeris-mcp.js"
   },
@@ -23,16 +23,21 @@
     "claude",
     "cursor",
     "demand-forecasting",
+    "ensemble",
     "forecasting",
+    "foundation-models",
     "llm-tools",
     "mcp",
     "model-context-protocol",
     "prediction",
     "probabilistic-forecasting",
     "time-series",
+    "time-series-foundation-model",
     "timesfm",
     "tirex",
-    "toto"
+    "toto",
+    "tsfm",
+    "zero-shot-forecasting"
   ],
   "homepage": "https://ephemeris.cascade.industries",
   "repository": {
