@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "17 6 * * 1"
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [18, 20, 22]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+      - run: npm install --no-audit --no-fund
+      - name: Syntax check
+        run: node --check cli/ephemeris-mcp.js && node --check test/smoke.js
+      - name: Manifests are valid JSON
+        run: for f in package.json glama.json .mcp.json .claude-plugin/*.json; do node -e "JSON.parse(require('fs').readFileSync('$f','utf8'))" && echo "ok $f"; done
+      - name: Missing key fails with a message
+        run: |
+          set +e
+          out=$(EPHEMERIS_API_KEY= node cli/ephemeris-mcp.js 2>&1); code=$?
+          set -e
+          test "$code" = 1 && echo "$out" | grep -q EPHEMERIS_API_KEY
+      - name: Package contents
+        run: npm pack --dry-run
+      - name: Live smoke test (lists tools through the bridge)
+        run: npm test

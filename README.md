@@ -1,5 +1,7 @@
 # Ephemeris MCP server: time-series forecasting for AI agents
 
+[![CI](https://github.com/TensorLink-AI/ephemeris-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/TensorLink-AI/ephemeris-mcp/actions/workflows/ci.yml) [![npm](https://img.shields.io/npm/v/ephemeris-mcp)](https://www.npmjs.com/package/ephemeris-mcp)
+
 [![Add Ephemeris to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en/install-mcp?name=ephemeris&config=eyJ1cmwiOiJodHRwczovL2VwaGVtZXJpcy5jYXNjYWRlLmluZHVzdHJpZXMvYXBpL21jcCIsImhlYWRlcnMiOnsiQXV0aG9yaXphdGlvbiI6IkJlYXJlciBZT1VSX0VQSEVNRVJJU19BUElfS0VZIn19)
 
 Give Claude, Cursor, ChatGPT or any MCP client the ability to **forecast numeric time series with prediction intervals**: sales, demand, inventory, web traffic, signups, revenue, energy load, prices, sensor readings, infrastructure metrics.

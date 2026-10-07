@@ -5,6 +5,9 @@
   "bin": {
     "ephemeris-mcp": "cli/ephemeris-mcp.js"
   },
+  "scripts": {
+    "test": "node test/smoke.js"
+  },
   "files": [
     "cli/"
   ],
