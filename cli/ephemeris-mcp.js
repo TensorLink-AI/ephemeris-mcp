@@ -12,6 +12,11 @@ const fs = require("node:fs");
 const os = require("node:os");
 const path = require("node:path");
 
+if (process.argv.length === 3 && process.argv[2] === "--version") {
+  process.stdout.write(require("../package.json").version + "\n");
+  process.exit(0);
+}
+
 const key = (process.env.EPHEMERIS_API_KEY || "").trim();
 if (!key) {
   process.stderr.write(
