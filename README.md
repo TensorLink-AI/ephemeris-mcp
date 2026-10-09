@@ -28,6 +28,7 @@ Scored with each benchmark's own harness. Details: [ephemeris.cascade.industries
 
 | Tool | What it does |
 |---|---|
+| `get_version` | Public hosted server version, nullable build commit and supported artifact schemas; no key or inference |
 | `forecast` | Forecast 1 to 64 series in one call: `route`, `ensemble` or `explicit` mode, any quantiles, optional covariates, horizons up to 4096 sampling steps (subject to live model limits and the 120,000 output-value budget) |
 | `describe_forecast` | Deterministic interpretation of a saved artifact; no new inference |
 | `plot_forecast` | Inline PNG by default, optional SVG, from a saved artifact; no new inference |
@@ -142,3 +143,5 @@ Pass the complete saved object as `artifact` to `describe_forecast` or `plot_for
 Supply units, timezone, target definition and measurement semantics in `context` when known. Context reaches the hosted service but is not sent as model input. Ask for missing definitions; do not guess. A horizon counts sampling steps. Quantile bands are nominal marginal intervals: they do not establish calibrated coverage, cumulative intervals, path probabilities or the actual peak distribution. Distinguish observed sales from underlying demand and known future inputs from scenario assumptions. Billing amounts ending in `_mc` are millicredits (1000 mc = 1 credit).
 
 Hosted MCP updates are deployed centrally. Reconnect or start a new conversation if the client caches its tool list. Existing npm bridges forward the new tools; updating the bridge package is only necessary for changes to the bridge itself. Client transport support and image/attachment rendering vary. The hosted endpoint uses Streamable HTTP; SSE-only clients need compatible transport support.
+
+Version diagnostics: MCP `get_version` with `{}` reports the hosted server version, nullable build commit and supported forecast schemas without an API key or inference charge. `ephemeris-mcp --version` reports this installed npm bridge version offline, not the remote server version. For the standalone CLI, use `ephemeris --version` or `ephemeris version --json`. These versions are independent.
