@@ -7,7 +7,7 @@
 const { spawn } = require("node:child_process");
 const path = require("node:path");
 
-const EXPECTED = ["forecast", "get_balance", "get_usage", "list_models"];
+const EXPECTED = ["forecast", "get_balance", "get_usage", "list_models", "describe_forecast", "plot_forecast"];
 const child = spawn(process.execPath, [path.join(__dirname, "..", "cli", "ephemeris-mcp.js")], {
   env: { ...process.env, EPHEMERIS_API_KEY: process.env.EPHEMERIS_API_KEY || "pc_live_placeholder" },
   stdio: ["pipe", "pipe", "inherit"],

@@ -8,8 +8,11 @@ on:
     - cron: "17 6 * * 1"
   workflow_dispatch:
 
+permissions:
+  contents: read
 jobs:
   test:
+    timeout-minutes: 5
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -20,7 +23,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
-      - run: npm install --no-audit --no-fund
+      - run: npm ci --no-audit --no-fund
       - name: Syntax check
         run: node --check cli/ephemeris-mcp.js && node --check test/smoke.js
       - name: Manifests are valid JSON
@@ -35,3 +38,9 @@ jobs:
         run: npm pack --dry-run
       - name: Live smoke test (lists tools through the bridge)
         run: npm test
+      - run: npm pack
+      - uses: actions/upload-artifact@v4
+        with:
+          name: bridge-node${{ matrix.node }}
+          path: '*.tgz'
+          retention-days: 14

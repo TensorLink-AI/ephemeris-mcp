@@ -28,7 +28,9 @@ Scored with each benchmark's own harness. Details: [ephemeris.cascade.industries
 
 | Tool | What it does |
 |---|---|
-| `forecast` | Forecast 1 to 64 series in one call: `route`, `ensemble` or `explicit` mode, any quantiles, optional covariates, horizons up to 512 steps |
+| `forecast` | Forecast 1 to 64 series in one call: `route`, `ensemble` or `explicit` mode, any quantiles, optional covariates, horizons up to 4096 sampling steps (subject to live model limits and the 120,000 output-value budget) |
+| `describe_forecast` | Deterministic interpretation of a saved artifact; no new inference |
+| `plot_forecast` | Inline PNG by default, optional SVG, from a saved artifact; no new inference |
 | `list_models` | The live panel: health, capabilities, horizon limits, ensemble weights, prices |
 | `get_balance` | Spendable credits |
 | `get_usage` | Recent requests and what each cost |
@@ -107,7 +109,7 @@ claude mcp add --transport http ephemeris https://ephemeris.cascade.industries/a
 Once connected, ask:
 
 - "Here are my last 18 months of sales: … Forecast the next 6 months with an 80% interval."
-- "Forecast next week's hourly traffic from this CSV and tell me the likely peak."
+- "Forecast next week's hourly traffic from this CSV and identify the highest median forecast step, without claiming the actual peak distribution."
 - "Use the ensemble to project daily signups for 90 days; plot the median and the 10th to 90th percentile band."
 
 More in [examples/prompts.md](examples/prompts.md). Without MCP, the same forecast is one REST call: [examples/rest_forecast.py](examples/rest_forecast.py).
@@ -130,3 +132,13 @@ More in [examples/prompts.md](examples/prompts.md). Without MCP, the same foreca
 - Status: [ephemeris.cascade.industries/status](https://ephemeris.cascade.industries/status)
 
 The code in this repository (the plugin manifest, skill and stdio bridge) is MIT-licensed. The models keep their own licences, listed on each model page.
+
+## Saved forecasts and updates
+
+Retain an `idempotency_key` before a paid MCP `forecast` submission. If the outcome is uncertain, retry identical inputs with that key within the server's retention period; a fresh or expired key may incur another charge. Forecasts include an `ephemeris.forecast` v1 artifact by default. It contains the submitted input history, response, billing information and supplied local context. Save it privately in the client; embedded URNs are not permanent download links or hosted storage.
+
+Pass the complete saved object as `artifact` to `describe_forecast` or `plot_forecast`; neither accepts a local path or URL. Plotting defaults to PNG; use `format: "svg"` for SVG. These authenticated tools do not run inference or charge for a new forecast. Correcting supplied local labels or plotting a result does not require another forecast. Artifact input is limited to 1 MiB; use the CLI for larger local artifacts. If `artifact_status` is `unavailable`, preserve the raw successful result and original request rather than paying to rerun it.
+
+Supply units, timezone, target definition and measurement semantics in `context` when known. Context reaches the hosted service but is not sent as model input. Ask for missing definitions; do not guess. A horizon counts sampling steps. Quantile bands are nominal marginal intervals: they do not establish calibrated coverage, cumulative intervals, path probabilities or the actual peak distribution. Distinguish observed sales from underlying demand and known future inputs from scenario assumptions. Billing amounts ending in `_mc` are millicredits (1000 mc = 1 credit).
+
+Hosted MCP updates are deployed centrally. Reconnect or start a new conversation if the client caches its tool list. Existing npm bridges forward the new tools; updating the bridge package is only necessary for changes to the bridge itself. Client transport support and image/attachment rendering vary. The hosted endpoint uses Streamable HTTP; SSE-only clients need compatible transport support.
