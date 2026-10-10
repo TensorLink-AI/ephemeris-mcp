@@ -38,7 +38,15 @@ Scored with each benchmark's own harness. Details: [ephemeris.cascade.industries
 
 ## Get an API key
 
-Sign up at [ephemeris.cascade.industries](https://ephemeris.cascade.industries/sign-up), add credits, and create a key (`pc_live_...`) in the dashboard. Pay per forecast, no subscription: [pricing](https://ephemeris.cascade.industries/pricing).
+Quickest, from a terminal:
+
+```
+npx ephemeris-mcp login
+```
+
+It opens Ephemeris in your browser. Sign in (or sign up), check the page shows the same code as your terminal, and approve. The key is saved to `~/.config/ephemeris/credentials`, readable by you only, and the stdio bridge below uses it, with no key in your MCP config. The [Ephemeris CLI](https://www.npmjs.com/package/ephemeris-cli) (`ephemeris auth login`) and savetokens share the same file. `npx ephemeris-mcp logout` deletes it; revoke the key itself on the dashboard's API keys page.
+
+Or sign up at [ephemeris.cascade.industries](https://ephemeris.cascade.industries/sign-up) and create a key (`pc_live_...`) in the dashboard. Pay per forecast, no subscription: [pricing](https://ephemeris.cascade.industries/pricing).
 
 ## Connect
 
@@ -91,17 +99,22 @@ claude mcp add --transport http ephemeris https://ephemeris.cascade.industries/a
 
 **Claude Desktop and other clients that only run local (stdio) servers**
 
+After `npx ephemeris-mcp login`, no key goes in the config:
+
 ```json
 {
   "mcpServers": {
     "ephemeris": {
       "command": "npx",
-      "args": ["-y", "ephemeris-mcp"],
-      "env": { "EPHEMERIS_API_KEY": "pc_live_your_key" }
+      "args": ["-y", "ephemeris-mcp"]
     }
   }
 }
 ```
+
+Or pass a key explicitly with `"env": { "EPHEMERIS_API_KEY": "pc_live_your_key" }`; it wins over the saved one.
+
+**Claude Code, with the saved key**: `claude mcp add ephemeris -- npx -y ephemeris-mcp`
 
 **OpenAI Responses API, Anthropic Messages API, Codex, Gemini CLI**: see [the docs](https://ephemeris.cascade.industries/docs#agents).
 

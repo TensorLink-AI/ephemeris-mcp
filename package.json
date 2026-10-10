@@ -6,7 +6,7 @@
     "ephemeris-mcp": "cli/ephemeris-mcp.js"
   },
   "scripts": {
-    "test": "node test/smoke.js"
+    "test": "node test/login.js && node test/smoke.js"
   },
   "files": [
     "cli/"

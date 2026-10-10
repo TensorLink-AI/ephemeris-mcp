@@ -26,7 +26,7 @@ mcp_servers:
 
 If MCP is not available, call `POST https://ephemeris.cascade.industries/api/v1/forecast` with the same bearer header (request and response format in llms-full.txt).
 
-The user must provide the API key. Never hard-code it or write it to files in their repository.
+The user must provide the API key. Never hard-code it or write it to files in their repository. If they have none, ask them to run `npx ephemeris-mcp login` in their own terminal: it signs them in through the browser and saves a key the stdio bridge uses, so the key never passes through the conversation.
 
 ## Workflow
 
