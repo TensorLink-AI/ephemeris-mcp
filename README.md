@@ -15,7 +15,8 @@ Ephemeris runs a panel of open-weights, zero-shot time-series foundation models 
 | [Toto 2](https://ephemeris.cascade.industries/models/toto-2) | Datadog | `toto2-313m` |
 | [TiRex-2](https://ephemeris.cascade.industries/models/tirex-2) | NXAI | `tirex2` |
 | [PatchTST-FM r2](https://ephemeris.cascade.industries/models/patchtst-fm) | IBM Granite | `patchtst-fm-r2` |
-| [FlowState r1](https://ephemeris.cascade.industries/models/flowstate) | IBM Granite | `flowstate-r1` |
+| [Timestral 209M](https://ephemeris.cascade.industries/models/timestral) | Mistral AI | `timestral-209m` |
+| [FlowState r1](https://ephemeris.cascade.industries/models/flowstate) | IBM Granite | `flowstate-r1` (by name only; not in the ensemble) |
 
 Send history, get quantile forecasts back. No training, no feature engineering, no GPU. Name a model, let Ephemeris **route** to the best fit for your data, or use the **ensemble**, an accuracy-weighted blend of the panel:
 
