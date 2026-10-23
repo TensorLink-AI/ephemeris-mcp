@@ -11,6 +11,7 @@
 //   ephemeris-mcp logout                 delete the saved key file
 "use strict";
 
+try { require('./secure-runtime').assertSecureRuntime(); } catch (error) { console.error(error.message); process.exit(1); }
 const { spawn } = require("node:child_process");
 const fs = require("node:fs");
 const os = require("node:os");
