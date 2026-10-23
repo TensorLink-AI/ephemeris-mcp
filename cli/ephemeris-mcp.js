@@ -16,6 +16,7 @@ const fs = require("node:fs");
 const os = require("node:os");
 const path = require("node:path");
 const { readKey, saveKey, removeKey } = require("./credentials");
+const { untrustedRuntime } = require("./trust");
 
 const DEFAULT_MCP_URL = "https://ephemeris.cascade.industries/api/mcp";
 const args = process.argv.slice(2);
@@ -28,6 +29,8 @@ if (args.length === 1 && args[0] === "--version") {
 if (args[0] === "login") {
   const { deviceLogin } = require("./login");
   const origin = process.env.EPHEMERIS_BASE_URL || new URL(process.env.EPHEMERIS_MCP_URL || DEFAULT_MCP_URL).origin;
+  const unsafe = untrustedRuntime(origin);
+  if (unsafe) { process.stderr.write(`ephemeris-mcp login: ${unsafe}\n`); process.exit(1); }
   deviceLogin({ origin, browser: !args.includes("--no-browser"), say: (text) => process.stderr.write(text + "\n") })
     .then((key) => {
       const file = saveKey(key);
@@ -59,6 +62,8 @@ if (!key) {
 }
 
 const url = process.env.EPHEMERIS_MCP_URL || DEFAULT_MCP_URL;
+const unsafe = untrustedRuntime(url);
+if (unsafe) { process.stderr.write(`ephemeris-mcp: ${unsafe}\n`); process.exit(1); }
 const bridge = require.resolve("mcp-remote/package.json");
 const bin = require(bridge).bin;
 const entry = path.join(path.dirname(bridge), typeof bin === "string" ? bin : bin["mcp-remote"]);
