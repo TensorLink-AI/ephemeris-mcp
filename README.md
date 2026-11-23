@@ -6,7 +6,7 @@
 
 Give Claude, Cursor, ChatGPT or any MCP client the ability to **forecast numeric time series with prediction intervals**: sales, demand, inventory, web traffic, signups, revenue, energy load, prices, sensor readings, infrastructure metrics.
 
-Ephemeris runs a panel of seven open-weights, zero-shot time-series foundation models (TSFMs) behind one API key, plus an accuracy-weighted ensemble of them:
+Ephemeris runs a panel of eight open-weights, zero-shot time-series foundation models (TSFMs) behind one API key, plus an accuracy-weighted ensemble of them:
 
 | Model | Publisher | Use by name |
 |---|---|---|
@@ -17,6 +17,7 @@ Ephemeris runs a panel of seven open-weights, zero-shot time-series foundation m
 | [PatchTST-FM r2](https://ephemeris.cascade.industries/models/patchtst-fm) | IBM Granite | `patchtst-fm-r2` |
 | [FlowState r1](https://ephemeris.cascade.industries/models/flowstate) | IBM Granite | `flowstate-r1` |
 | [Timestral](https://ephemeris.cascade.industries/models/timestral) | Mistral AI | `timestral-209m` |
+| [T0 Gamma](https://ephemeris.cascade.industries/models/t0-gamma) | The Forecasting Company | `t0-gamma` |
 
 Send history, get quantile forecasts back. No training, no feature engineering, no GPU. Name a model, let Ephemeris **route** to the best fit for your data, or use the **ensemble**, an accuracy-weighted blend of the panel:
 
