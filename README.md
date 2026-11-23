@@ -1,4 +1,4 @@
-# Ephemeris MCP server: time-series foundation model (TSFM) forecasting for AI agents
+# Ephemeris: time-series forecasting MCP server and API for AI agents
 
 [![CI](https://github.com/TensorLink-AI/ephemeris-mcp/actions/workflows/ci.yml/badge.svg)](https://github.com/TensorLink-AI/ephemeris-mcp/actions/workflows/ci.yml) [![npm](https://img.shields.io/npm/v/ephemeris-mcp)](https://www.npmjs.com/package/ephemeris-mcp)
 
@@ -6,7 +6,7 @@
 
 Give Claude, Cursor, ChatGPT or any MCP client the ability to **forecast numeric time series with prediction intervals**: sales, demand, inventory, web traffic, signups, revenue, energy load, prices, sensor readings, infrastructure metrics.
 
-Ephemeris runs a panel of open-weights, zero-shot time-series foundation models (TSFMs) behind one API key, plus an accuracy-weighted ensemble of them:
+Ephemeris runs a panel of eight open-weights, zero-shot time-series foundation models (TSFMs) behind one API key, plus an accuracy-weighted ensemble of them:
 
 | Model | Publisher | Use by name |
 |---|---|---|
@@ -16,6 +16,8 @@ Ephemeris runs a panel of open-weights, zero-shot time-series foundation models 
 | [TiRex-2](https://ephemeris.cascade.industries/models/tirex-2) | NXAI | `tirex2` |
 | [PatchTST-FM r2](https://ephemeris.cascade.industries/models/patchtst-fm) | IBM Granite | `patchtst-fm-r2` |
 | [FlowState r1](https://ephemeris.cascade.industries/models/flowstate) | IBM Granite | `flowstate-r1` |
+| [Timestral](https://ephemeris.cascade.industries/models/timestral) | Mistral AI | `timestral-209m` |
+| [T0 Gamma](https://ephemeris.cascade.industries/models/t0-gamma) | The Forecasting Company | `t0-gamma` |
 
 Send history, get quantile forecasts back. No training, no feature engineering, no GPU. Name a model, let Ephemeris **route** to the best fit for your data, or use the **ensemble**, an accuracy-weighted blend of the panel:
 
@@ -41,10 +43,12 @@ Scored with each benchmark's own harness. Details: [ephemeris.cascade.industries
 Quickest, from a terminal:
 
 ```
-npx ephemeris-mcp login
+npx -y ephemeris-mcp login
 ```
 
-It opens Ephemeris in your browser. Sign in (or sign up), check the page shows the same code as your terminal, and approve. The key is saved to `~/.config/ephemeris/credentials`, readable by you only, and the stdio bridge below uses it, with no key in your MCP config. The [Ephemeris CLI](https://www.npmjs.com/package/ephemeris-cli) (`ephemeris auth login`) and savetokens share the same file. `npx ephemeris-mcp logout` deletes it; revoke the key itself on the dashboard's API keys page.
+Install from npm only. The PyPI package named `ephemeris-mcp` is an unrelated astronomy project.
+
+It opens Ephemeris in your browser. Sign in (or sign up), check the page shows the same code as your terminal, and approve. The key is saved to `~/.config/ephemeris/credentials`, readable by you only, and the stdio bridge below uses it, with no key in your MCP config. The [Ephemeris CLI](https://www.npmjs.com/package/ephemeris-cli) (`ephemeris auth login`) and savetokens share the same file. `npx -y ephemeris-mcp logout` deletes it; revoke the key itself on the dashboard's API keys page.
 
 Or sign up at [ephemeris.cascade.industries](https://ephemeris.cascade.industries/sign-up) and create a key (`pc_live_...`) in the dashboard. Pay per forecast, no subscription: [pricing](https://ephemeris.cascade.industries/pricing).
 
@@ -99,7 +103,7 @@ claude mcp add --transport http ephemeris https://ephemeris.cascade.industries/a
 
 **Claude Desktop and other clients that only run local (stdio) servers**
 
-After `npx ephemeris-mcp login`, no key goes in the config:
+After `npx -y ephemeris-mcp login`, no key goes in the config:
 
 ```json
 {
